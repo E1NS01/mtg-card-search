@@ -139,6 +139,7 @@ function FormPage() {
                     type="text"
                     value={name || ""}
                     onChange={handleChange("name")}
+                    aria-label="Card Name"
                   />
                   <ErrorMessage name="name" component="div" />
                 </WholeLineInputContainer>
@@ -152,6 +153,7 @@ function FormPage() {
                       component="select"
                       value={type || ""}
                       onChange={handleChange("type")}
+                      aria-label="Card Type"
                     >
                       <option value="">Any</option>
                       <option value="creature">Creature</option>
@@ -176,6 +178,7 @@ function FormPage() {
                       value={cost || ""}
                       min={0}
                       onChange={handleChange("cost")}
+                      aria-label="Card Cost"
                     />
                     <ErrorMessage name="cost" component="div" />
                   </SplitInputContainer>
@@ -192,7 +195,7 @@ function FormPage() {
                     >
                       Image
                     </StyledLabel>
-                    <CardImage src={image} />
+                    <CardImage src={image} alt="Card Image" />
                   </CardImageContainer>
                   <ImageButtonContainer>
                     <RefreshImageButton
@@ -202,6 +205,7 @@ function FormPage() {
                           updateCardForm("image", await getRandomCardImage())
                         )
                       }
+                      aria-label="Refresh Card Image"
                     >
                       New Image
                     </RefreshImageButton>
@@ -215,6 +219,7 @@ function FormPage() {
                     name="description"
                     value={description || ""}
                     onChange={handleChange("description")}
+                    aria-label="Card Description"
                   />
                   <ErrorMessage name="description" component="div" />
                 </WholeLineInputContainer>
@@ -234,6 +239,7 @@ function FormPage() {
                       value={power || ""}
                       min={0}
                       onChange={handleChange("power")}
+                      aria-label="Card Power"
                     />
                     <ErrorMessage name="power" component="div" />
                   </SplitInputContainer>
@@ -247,14 +253,19 @@ function FormPage() {
                       value={toughness || ""}
                       min={0}
                       onChange={handleChange("toughness")}
+                      aria-label="Card Toughness"
                     />
                     <ErrorMessage name="toughness" component="div" />
                   </SplitInputContainer>
                 </InputContainer>
 
                 <ButtonContainer>
-                  <ClearButton type="reset">Reset</ClearButton>
-                  <SubmitButton type="submit">Search</SubmitButton>
+                  <ClearButton type="reset" aria-label="Reset Form">
+                    Reset
+                  </ClearButton>
+                  <SubmitButton type="submit" aria-label="Submit Form">
+                    Search
+                  </SubmitButton>
                 </ButtonContainer>
               </Form>
             );

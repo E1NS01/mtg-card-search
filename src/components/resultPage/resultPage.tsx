@@ -26,7 +26,10 @@ function ResultPage() {
       <Container>
         <NoCardsFoundContainer>
           <h1>No Cards found!</h1>
-          <EditSearchButton onClick={() => navigate("/")}>
+          <EditSearchButton
+            onClick={() => navigate("/")}
+            aria-label="Edit Search"
+          >
             Edit Search
           </EditSearchButton>
         </NoCardsFoundContainer>
@@ -41,13 +44,14 @@ function ResultPage() {
           <FormCardDisplay />
 
           <CardImage>
-            <img src={data[index]} alt="Card" />
+            <img src={data[index]} alt="Card" aria-label="Card Image" />
             <NavigationContainer>
               <NavigationButton
                 disabled={index === 0}
                 onClick={() => {
                   setIndex((prev) => prev - 1);
                 }}
+                aria-label="Previous Card"
               >
                 ←
               </NavigationButton>
@@ -57,6 +61,7 @@ function ResultPage() {
                 onClick={() => {
                   setIndex((prev) => prev + 1);
                 }}
+                aria-label="Next Card"
               >
                 →
               </NavigationButton>
@@ -64,7 +69,11 @@ function ResultPage() {
           </CardImage>
         </ContentContainer>
         <ColorRepresentation />
-        <EditSearchButton moveleft={isSuccess} onClick={() => navigate("/")}>
+        <EditSearchButton
+          moveleft={isSuccess}
+          onClick={() => navigate("/")}
+          aria-label="Edit Search"
+        >
           Edit Search
         </EditSearchButton>
       </CardWrapper>

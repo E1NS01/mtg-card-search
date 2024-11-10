@@ -19,7 +19,9 @@ export function FormCardDisplay() {
         <CardName>{name}</CardName>
         <ManaCost>{cost}</ManaCost>
       </CardHeader>
-      <CardArtPlaceholder>{<img src={image} alt="" />}</CardArtPlaceholder>
+      <CardArtPlaceholder>
+        {<img src={image} alt="Mock Card Image" aria-label="Mock Card Image" />}
+      </CardArtPlaceholder>
       <CardType>{type}</CardType>
       <CardDescription>
         {description}
