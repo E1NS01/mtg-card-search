@@ -3,7 +3,7 @@ import styled, { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Matrix Bold';
-    src: url('src/fonts/MatrixBold.ttf') format('truetype');
+    src: url('/matrix_bold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
   }

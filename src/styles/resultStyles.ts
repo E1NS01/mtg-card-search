@@ -53,6 +53,7 @@ export const CardHeader = styled.div`
 
 export const CardName = styled.h3`
   font-size: 1.5rem;
+  padding-left: 1rem;
   margin: 0;
 `;
 
@@ -68,7 +69,7 @@ export const CardType = styled.div`
   background-color: #b3b3b3;
   margin-bottom: 0.45rem;
   align-content: center;
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   border-radius: 0.5rem;
 `;
 
@@ -102,6 +103,7 @@ export const CardDescription = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 0.5rem;
+  padding-left: 1rem;
 `;
 
 export const PowerToughness = styled.div`
@@ -123,6 +125,10 @@ export const NavigationContainer = styled.div`
   justify-content: center;
   gap: 1.5rem;
   margin-top: 1.5rem;
+
+  p {
+    font-size: 1.5rem;
+  }
 `;
 
 export const NavigationButton = styled.button`

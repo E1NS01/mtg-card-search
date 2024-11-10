@@ -60,7 +60,7 @@ export async function getCards(data: CardValues) {
       for (const card of data.data) {
         // adds the full card image url or a placeholder image, if no card scan is found
         const imageUri =
-          card.image_uris?.normal || "src/assets/full_card_placeholder.png";
+          card.image_uris?.normal || "/full_card_placeholder.png";
         if (imageUri) cardList.data.push(imageUri);
 
         (card.color_identity || []).forEach((color: string) => {

@@ -31,7 +31,7 @@ function LoadingPage() {
   return (
     <Container>
       <LoadingContainer>
-        <img src="src/assets/mana_image.webp" alt="Magic Mana Types" />
+        <img src="/mana_image.webp" alt="Magic Mana Types" />
       </LoadingContainer>
     </Container>
   );
