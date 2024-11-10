@@ -1,9 +1,8 @@
-import { Formik, FormikHelpers, Form, ErrorMessage } from "formik";
-import { connect, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { resetCardForm, updateCardForm } from "../../actions/cardFormActions";
 import { getRandomCardImage } from "../../lib/api";
 import * as Yup from "yup";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { resetCardList } from "../../actions/cardListActions";
 import {
@@ -24,65 +23,80 @@ import {
 } from "../../styles/formStyles";
 import { toast } from "react-toastify";
 import { Container } from "../../styles/globalStyle";
+import { Formik, FormikHelpers, ErrorMessage, Form } from "formik";
 
-function FormPage({
-  updateCardForm,
-  resetCardForm,
-  resetCardList,
-}: CardFormProps) {
-  const cardForm = useSelector((state: RootState) => state.cardForm);
+const validationSchema = Yup.object().shape({
+  name: Yup.string(),
+  cost: Yup.number().integer().min(0),
+  description: Yup.string(),
+  power: Yup.number().integer().min(0),
+  toughness: Yup.number().integer().min(0),
+  type: Yup.string(),
+});
+
+function FormPage() {
+  const { name, cost, image, type, description, power, toughness } =
+    useSelector((state: RootState) => state.cardForm);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     async function initialImage() {
-      if (!cardForm.image) {
-        updateCardForm("image", await getRandomCardImage());
+      if (!image) {
+        dispatch(updateCardForm("image", await getRandomCardImage()));
       }
     }
-    resetCardList();
+    dispatch(resetCardList());
     initialImage();
-  }, [updateCardForm, cardForm, resetCardList]);
+  }, [image, dispatch]);
 
-  const validationSchema = Yup.object().shape({
-    name: Yup.string(),
-    cost: Yup.number().integer().min(0),
-    description: Yup.string(),
-    power: Yup.number().integer().min(0),
-    toughness: Yup.number().integer().min(0),
-    type: Yup.string(),
-  });
+  async function handleSubmit(
+    values: CardFormState,
+    { setSubmitting }: FormikHelpers<CardFormState>
+  ) {
+    try {
+      if (
+        !values.type &&
+        !values.cost &&
+        !values.description &&
+        !values.power &&
+        !values.toughness
+      ) {
+        toast.warn(
+          "At least one of Type, Cost, Description, Power or Toughness must be filled!"
+        );
+        return;
+      }
+      navigate("/loading");
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast.error("An error occurred while submitting the form.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  async function handleReset() {
+    dispatch(resetCardForm());
+    dispatch(updateCardForm("image", await getRandomCardImage()));
+  }
 
   return (
     <Container>
       <FormContainer>
         <Formik
-          initialValues={cardForm}
+          initialValues={{
+            name,
+            cost,
+            image,
+            type,
+            description,
+            power,
+            toughness,
+          }}
           validationSchema={validationSchema}
-          onSubmit={(_, { setSubmitting }: FormikHelpers<CardValues>) => {
-            try {
-              if (
-                !cardForm.type &&
-                !cardForm.cost &&
-                !cardForm.description &&
-                !cardForm.power &&
-                !cardForm.toughness
-              ) {
-                toast.warn(
-                  "At least one of Type, Cost, Descripton, Power or Toughness musst be filled!"
-                );
-                return;
-              }
-              navigate("/loading");
-            } catch (error) {
-              console.error("Submission error:", error);
-            } finally {
-              setSubmitting(false);
-            }
-          }}
-          onReset={async () => {
-            resetCardForm();
-            updateCardForm("image", await getRandomCardImage());
-          }}
+          onSubmit={handleSubmit}
+          onReset={handleReset}
         >
           {({ setFieldValue }) => {
             const handleChange =
@@ -94,7 +108,7 @@ function FormPage({
               ) => {
                 const { value } = event.target;
                 setFieldValue(field, value);
-                updateCardForm(field, value);
+                dispatch(updateCardForm(field, value));
 
                 if (field === "type") {
                   if (
@@ -103,12 +117,12 @@ function FormPage({
                     value === "instant" ||
                     value === "land"
                   ) {
-                    updateCardForm("power", "");
-                    updateCardForm("toughness", "");
+                    dispatch(updateCardForm("power", ""));
+                    dispatch(updateCardForm("toughness", ""));
                   }
                 }
                 if (value === "land") {
-                  updateCardForm("cost", "");
+                  dispatch(updateCardForm("cost", ""));
                 }
               };
 
@@ -123,11 +137,12 @@ function FormPage({
                     id="name"
                     name="name"
                     type="text"
-                    value={cardForm.name || ""}
+                    value={name || ""}
                     onChange={handleChange("name")}
                   />
                   <ErrorMessage name="name" component="div" />
                 </WholeLineInputContainer>
+
                 <InputContainer>
                   <SplitInputContainer>
                     <StyledLabel htmlFor="type">Type</StyledLabel>
@@ -135,7 +150,7 @@ function FormPage({
                       id="type"
                       name="type"
                       component="select"
-                      value={cardForm.type || ""}
+                      value={type || ""}
                       onChange={handleChange("type")}
                     >
                       <option value="">Any</option>
@@ -150,8 +165,7 @@ function FormPage({
 
                   <SplitInputContainer
                     style={{
-                      visibility:
-                        cardForm.type === "land" ? "hidden" : "visible",
+                      visibility: type === "land" ? "hidden" : "visible",
                     }}
                   >
                     <StyledLabel htmlFor="cost">Cost</StyledLabel>
@@ -159,12 +173,14 @@ function FormPage({
                       id="cost"
                       name="cost"
                       type="number"
-                      value={cardForm.cost || ""}
+                      value={cost || ""}
+                      min={0}
                       onChange={handleChange("cost")}
                     />
                     <ErrorMessage name="cost" component="div" />
                   </SplitInputContainer>
                 </InputContainer>
+
                 <ImageContainer>
                   <CardImageContainer>
                     <StyledLabel
@@ -176,13 +192,15 @@ function FormPage({
                     >
                       Image
                     </StyledLabel>
-                    <CardImage src={cardForm.image} />
+                    <CardImage src={image} />
                   </CardImageContainer>
                   <ImageButtonContainer>
                     <RefreshImageButton
                       type="button"
                       onClick={async () =>
-                        updateCardForm("image", await getRandomCardImage())
+                        dispatch(
+                          updateCardForm("image", await getRandomCardImage())
+                        )
                       }
                     >
                       New Image
@@ -195,7 +213,7 @@ function FormPage({
                   <StyledInput
                     id="description"
                     name="description"
-                    value={cardForm.description || ""}
+                    value={description || ""}
                     onChange={handleChange("description")}
                   />
                   <ErrorMessage name="description" component="div" />
@@ -204,9 +222,7 @@ function FormPage({
                 <InputContainer
                   style={{
                     visibility:
-                      cardForm.type === "creature" || cardForm.type === ""
-                        ? "visible"
-                        : "hidden",
+                      type === "creature" || type === "" ? "visible" : "hidden",
                   }}
                 >
                   <SplitInputContainer>
@@ -215,7 +231,7 @@ function FormPage({
                       id="power"
                       name="power"
                       type="number"
-                      value={cardForm.power || ""}
+                      value={power || ""}
                       min={0}
                       onChange={handleChange("power")}
                     />
@@ -228,7 +244,7 @@ function FormPage({
                       id="toughness"
                       name="toughness"
                       type="number"
-                      value={cardForm.toughness || ""}
+                      value={toughness || ""}
                       min={0}
                       onChange={handleChange("toughness")}
                     />
@@ -249,14 +265,4 @@ function FormPage({
   );
 }
 
-function mapStateToProps(state: RootState) {
-  return { cardForm: state.cardForm };
-}
-
-const mapDispatchToProps = {
-  updateCardForm,
-  resetCardForm,
-  resetCardList,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FormPage);
+export default FormPage;

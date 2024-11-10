@@ -11,7 +11,7 @@ interface LoadingProps {
   ) => void;
 }
 
-interface CardValues {
+interface CardFormState {
   type?: "creature" | "enchantment" | "instant" | "sorcery" | "land" | "";
   name?: string;
   cost?: string;

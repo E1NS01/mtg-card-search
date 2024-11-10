@@ -146,7 +146,7 @@ export const NavigationButton = styled.button`
   }
 `;
 
-export const EditSearchButton = styled.button<{ moveLeft?: boolean }>`
+export const EditSearchButton = styled.button<{ moveleft?: boolean }>`
   width: 7.5rem;
   height: 3rem;
   border-radius: 1rem;
@@ -154,8 +154,8 @@ export const EditSearchButton = styled.button<{ moveLeft?: boolean }>`
   border: none;
   font-size: 1.5rem;
 
-  ${({ moveLeft }) =>
-    moveLeft &&
+  ${({ moveleft }) =>
+    moveleft &&
     `
     position: absolute;
     left: 2.8rem;

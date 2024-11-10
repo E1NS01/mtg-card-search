@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import cardFormReducer from "../reducers/cardFormReducer";
 import cardListReducer from "../reducers/cardListReducer";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   cardForm: cardFormReducer,
   cardList: cardListReducer,
 });

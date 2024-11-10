@@ -24,7 +24,7 @@ export async function getRandomCardImage(maxRetries = 5): Promise<string> {
   return imageUrl || import.meta.env.VITE_PLACEHOLDER_URL;
 }
 
-export async function getCards(data: CardValues) {
+export async function getCards(data: CardFormState) {
   let url = `${API_URL}/cards/search`;
 
   console.log(data);

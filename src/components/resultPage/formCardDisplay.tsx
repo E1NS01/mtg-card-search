@@ -11,22 +11,21 @@ import {
 } from "../../styles/resultStyles";
 
 export function FormCardDisplay() {
-  const cardFormData = useSelector((state: RootState) => state.cardForm);
+  const { name, cost, image, type, description, power, toughness } =
+    useSelector((state: RootState) => state.cardForm);
   return (
     <MockCard>
       <CardHeader>
-        <CardName>{cardFormData.name}</CardName>
-        <ManaCost>{cardFormData.cost}</ManaCost>
+        <CardName>{name}</CardName>
+        <ManaCost>{cost}</ManaCost>
       </CardHeader>
-      <CardArtPlaceholder>
-        {<img src={cardFormData.image} alt="" />}
-      </CardArtPlaceholder>
-      <CardType>{cardFormData.type}</CardType>
+      <CardArtPlaceholder>{<img src={image} alt="" />}</CardArtPlaceholder>
+      <CardType>{type}</CardType>
       <CardDescription>
-        {cardFormData.description}
+        {description}
 
         <PowerToughness>
-          {cardFormData.power || "x"}/{cardFormData.toughness || "x"}
+          {power || "x"}/{toughness || "x"}
         </PowerToughness>
       </CardDescription>
     </MockCard>

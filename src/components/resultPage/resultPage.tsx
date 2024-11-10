@@ -1,4 +1,4 @@
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   CardImage,
@@ -16,10 +16,10 @@ import { Container } from "../../styles/globalStyle";
 
 function ResultPage() {
   const [index, setIndex] = useState<number>(0);
-  const cardListData = useSelector((state: RootState) => state.cardList);
+  const { data } = useSelector((state: RootState) => state.cardList);
   const navigate = useNavigate();
 
-  const isSuccess = cardListData.data[0] !== "error";
+  const isSuccess = data[0] !== "error";
 
   if (!isSuccess) {
     return (
@@ -39,35 +39,32 @@ function ResultPage() {
       <CardWrapper>
         <ContentContainer>
           <FormCardDisplay />
-          <div>
-            <CardImage>
-              <img src={cardListData.data[index]} alt="Card" />
-              <NavigationContainer>
-                <NavigationButton
-                  disabled={index === 0}
-                  onClick={() => {
-                    setIndex((prev) => prev - 1);
-                  }}
-                >
-                  ←
-                </NavigationButton>
-                <p>{`${index + 1} / ${cardListData.data.length}`}</p>
-                <NavigationButton
-                  disabled={index >= cardListData.data.length - 1}
-                  onClick={() => {
-                    setIndex((prev) => prev + 1);
-                  }}
-                >
-                  →
-                </NavigationButton>
-              </NavigationContainer>
-            </CardImage>
-          </div>
+
+          <CardImage>
+            <img src={data[index]} alt="Card" />
+            <NavigationContainer>
+              <NavigationButton
+                disabled={index === 0}
+                onClick={() => {
+                  setIndex((prev) => prev - 1);
+                }}
+              >
+                ←
+              </NavigationButton>
+              <p>{`${index + 1} / ${data.length}`}</p>
+              <NavigationButton
+                disabled={index >= data.length - 1}
+                onClick={() => {
+                  setIndex((prev) => prev + 1);
+                }}
+              >
+                →
+              </NavigationButton>
+            </NavigationContainer>
+          </CardImage>
         </ContentContainer>
-        <div>
-          <ColorRepresentation />
-        </div>
-        <EditSearchButton moveLeft={isSuccess} onClick={() => navigate("/")}>
+        <ColorRepresentation />
+        <EditSearchButton moveleft={isSuccess} onClick={() => navigate("/")}>
           Edit Search
         </EditSearchButton>
       </CardWrapper>
@@ -75,4 +72,4 @@ function ResultPage() {
   );
 }
 
-export default connect()(ResultPage);
+export default ResultPage;

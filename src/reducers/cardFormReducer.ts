@@ -1,6 +1,6 @@
 import { RESET_FORM, UPDATE_FORM } from "../actions/cardFormActions";
 
-const initialState: CardValues = {
+const initialState: CardFormState = {
   type: "",
   name: undefined,
   cost: undefined,
@@ -11,7 +11,7 @@ const initialState: CardValues = {
 };
 
 function cardFormReducer(
-  state: CardValues = initialState,
+  state: CardFormState = initialState,
   action: { type: string; payload: { field: string; value: string | number } }
 ) {
   switch (action.type) {
