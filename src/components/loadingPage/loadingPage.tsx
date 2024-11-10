@@ -12,7 +12,11 @@ function LoadingPage() {
   return (
     <Container>
       <LoadingContainer>
-        <img src="/mana_image.webp" alt="Magic Mana Types" />
+        <img
+          src="/mana_image.webp"
+          alt="Magic Mana Types"
+          aria-label="Loading Mana Types"
+        />
       </LoadingContainer>
     </Container>
   );

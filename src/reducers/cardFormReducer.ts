@@ -2,10 +2,10 @@ import { RESET_FORM, UPDATE_FORM } from "../actions/cardFormActions";
 
 const initialState: CardFormState = {
   type: "",
-  name: undefined,
+  name: "",
   cost: undefined,
-  image: undefined,
-  description: undefined,
+  image: "",
+  description: "",
   power: undefined,
   toughness: undefined,
 };

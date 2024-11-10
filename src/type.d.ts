@@ -12,13 +12,13 @@ interface LoadingProps {
 }
 
 interface CardFormState {
-  type?: "creature" | "enchantment" | "instant" | "sorcery" | "land" | "";
-  name?: string;
-  cost?: string;
-  image?: string;
-  description?: string;
-  power?: string;
-  toughness?: string;
+  type: "creature" | "enchantment" | "instant" | "sorcery" | "land" | "";
+  name: string;
+  cost: number | undefined;
+  image: string;
+  description: string | undefined;
+  power: number | undefined;
+  toughness: number | undefined;
 }
 
 interface CardListState {

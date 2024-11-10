@@ -4,7 +4,7 @@ import { Circle } from "../../styles/resultStyles";
 export function ColorCircle({ color }: ColorCircleProps) {
   const cardListData = useSelector((state: RootState) => state.cardList);
   return (
-    <Circle color={color}>
+    <Circle color={color} aria-label={`Color circle for ${color}`}>
       <p>{`${(
         (cardListData.colors[color] / cardListData.data.length) *
         100
