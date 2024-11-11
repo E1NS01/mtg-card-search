@@ -25,7 +25,7 @@ MTG Card Search is a web application that allows you to search for Magic: The Ga
 
 ## Live Demo
 
-You can view and test the application live on Vercel: [MTG Card Search](https://your-vercel-deployment-url.com)
+You can view and test the application live on Vercel: [MTG Card Search](https://mtg-card-search-nu.vercel.app/)
 
 ## Installation
 

@@ -23,6 +23,7 @@ interface CardFormState {
 
 interface CardListState {
   data: string[];
+  error: { message: string; url: string } | null;
   colors: Record<string, number>;
 }
 
@@ -30,7 +31,11 @@ interface CardListAction {
   type: string;
   payload: {
     field: keyof CardListState;
-    value: string[] | Record<string, number>;
+    value:
+      | string[]
+      | Record<string, number>
+      | { message: string; url: string }
+      | null;
   };
 }
 
