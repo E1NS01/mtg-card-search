@@ -32,7 +32,13 @@ export async function getCards(data: CardFormState) {
   const queryParts = [
     data.type ? `type:${data.type}` : "",
     data.cost ? `cmc:${data.cost}` : "",
-    data.description ? `o:${data.description.trim()}` : "",
+    data.description
+      ? data.description
+          .trim()
+          .split(/\s+/)
+          .map((word) => `o:${word}`)
+          .join(" ")
+      : "",
     data.power ? `power:${data.power}` : "",
     data.toughness ? `toughness:${data.toughness}` : "",
   ].filter(Boolean);
