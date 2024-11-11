@@ -1,6 +1,8 @@
-const API_URL = import.meta.env.VITE_API_URL || "https://api.scryfall.com";
+const API_URL = process.env.VITE_API_URL || "https://api.scryfall.com";
 
-export async function getRandomCardImage(maxRetries = 5): Promise<string> {
+export async function getRandomCardImage(
+  maxRetries = 5
+): Promise<string | undefined> {
   let imageUrl: string | undefined;
   let attempts = 0;
 
@@ -23,7 +25,7 @@ export async function getRandomCardImage(maxRetries = 5): Promise<string> {
     }
   }
 
-  return imageUrl || import.meta.env.VITE_PLACEHOLDER_URL;
+  return imageUrl || process.env.VITE_PLACEHOLDER_URL;
 }
 
 export async function getCards(data: CardFormState) {

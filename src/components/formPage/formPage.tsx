@@ -101,7 +101,7 @@ function FormPage() {
         >
           {({ setFieldValue }) => {
             const handleChange =
-              (field: string) =>
+              (field: keyof CardFormState) =>
               (
                 event: React.ChangeEvent<
                   HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement

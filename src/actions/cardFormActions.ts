@@ -1,7 +1,10 @@
 export const UPDATE_FORM = "UPDATE_FORM";
 export const RESET_FORM = "RESET_FORM";
 
-export function updateCardForm(field: string, value: string | number) {
+export function updateCardForm(
+  field: keyof CardFormState,
+  value: string | number | undefined
+) {
   return { type: UPDATE_FORM, payload: { field, value } };
 }
 
