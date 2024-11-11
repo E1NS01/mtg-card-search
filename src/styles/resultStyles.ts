@@ -8,7 +8,7 @@ export const CardWrapper = styled.div`
 
   justify-content: center;
   padding: 6.5rem 6.2rem 8.2rem 6.2rem;
-  background-color: #4f4355;
+  background-color: ${({ theme }) => theme.colors.primary};
   border-radius: 1rem;
   position: relative;
 `;
@@ -37,13 +37,13 @@ export const MockCard = styled.div`
   width: 21rem;
   border-radius: 1.2rem;
   padding: 1.5rem;
-  background-color: #2a253a;
+  background-color: ${({ theme }) => theme.colors.secondary};
 `;
 
 export const CardHeader = styled.div`
   display: flex;
   min-height: 2.25rem;
-  color: #000;
+  color: ${({ theme }) => theme.colors.black};
   background-color: #b3b3b3;
   justify-content: space-between;
   align-items: center;
@@ -65,8 +65,8 @@ export const ManaCost = styled.span`
 export const CardType = styled.div`
   min-height: 1.5rem;
   font-size: 1.3rem;
-  color: #000;
-  background-color: #b3b3b3;
+  color: ${({ theme }) => theme.colors.black};
+  background-color: ${({ theme }) => theme.colors.lightGray};
   margin-bottom: 0.45rem;
   align-content: center;
   padding-left: 1rem;
@@ -77,7 +77,6 @@ export const CardArtPlaceholder = styled.div`
   max-width: 21rem;
   height: auto;
   max-height: 15.2rem;
-  background-color: #e5e7eb;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,7 +95,7 @@ export const CardArtPlaceholder = styled.div`
 export const CardDescription = styled.div`
   font-size: 1.3rem;
   height: 10rem;
-  background-color: #b3b3b3;
+  background-color: ${({ theme }) => theme.colors.lightGray};
   margin-bottom: 0;
   position: relative;
   overflow: hidden;
@@ -112,7 +111,7 @@ export const PowerToughness = styled.div`
   text-align: center;
   font-size: 1.7rem;
   font-weight: bold;
-  background-color: #757575;
+  background-color: ${({ theme }) => theme.colors.darkGray};
   position: absolute;
   bottom: 6px;
   right: 6px;
@@ -150,7 +149,7 @@ export const EditSearchButton = styled.button<{ moveleft?: boolean }>`
   width: 7.5rem;
   height: 3rem;
   border-radius: 1rem;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   border: none;
   font-size: 1.5rem;
 
@@ -169,7 +168,7 @@ export const ColorBar = styled.div`
   align-items: center;
   padding: 1.5rem;
   justify-content: space-around;
-  background-color: #2a253a;
+  background-color: ${({ theme }) => theme.colors.secondary};
 `;
 
 export const Circle = styled.div<{ color: string }>`
@@ -193,13 +192,13 @@ export const NoCardsFoundContainer = styled.div`
   padding: 3rem;
   display: flex;
   flex-direction: column;
-  background-color: #4f4355;
+  background-color: ${({ theme }) => theme.colors.primary};
   border-radius: 0.75rem;
   align-items: center;
   justify-content: center;
 
   h1 {
-    color: #fff;
+    color: ${({ theme }) => theme.colors.white};
     justify-content: center;
     margin-bottom: 4.5rem;
   }

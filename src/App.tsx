@@ -1,16 +1,11 @@
 import { ThemeProvider } from "styled-components";
-import GlobalStyle from "./styles/globalStyle";
+import { GlobalStyle, theme } from "./styles/globalStyle";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ResultPage from "./components/resultPage/resultPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FormPage from "./components/formPage/formPage";
 import LoadingPage from "./components/loadingPage/loadingPage";
-
-const theme = {
-  primaryColor: "#141414",
-  secondaryColor: "#1c1c1c",
-};
 
 function App() {
   return (

@@ -40,5 +40,5 @@ interface ColorCircleProps {
   color: string;
 }
 interface StyledInputProps {
-  width?: string; // Optional width prop
+  width?: string;
 }
