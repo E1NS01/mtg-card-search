@@ -1,6 +1,6 @@
 import { RESET_LIST, UPDATE_LIST } from "../actions/cardListActions";
 
-const initialState = {
+const initialState: CardListState = {
   data: [],
   error: null,
   colors: {
