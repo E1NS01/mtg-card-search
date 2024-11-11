@@ -13,15 +13,27 @@ function useFetchCards(
 
   useEffect(() => {
     async function fetchResults() {
-      const data = await getCards(cardFormData);
-      dispatch(updateCardList("data", data.data));
-      dispatch(updateCardList("colors", data.colors));
+      const cardData = await getCards(cardFormData);
+
+      if (!Array.isArray(cardData.data)) {
+        dispatch(
+          updateCardList("error", {
+            message: "Unexpected data format received.",
+            url: "",
+          })
+        );
+        return;
+      }
+
+      dispatch(updateCardList("data", cardData.data));
+      dispatch(updateCardList("colors", cardData.colors));
+      dispatch(updateCardList("error", cardData.error));
     }
     fetchResults();
   }, [cardFormData, dispatch]);
 
   useEffect(() => {
-    if (cardListData.data.length > 0) {
+    if (cardListData.data.length > 0 || cardListData.error) {
       navigate("/result");
     }
   }, [cardListData, navigate]);

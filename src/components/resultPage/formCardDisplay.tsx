@@ -22,7 +22,7 @@ export function FormCardDisplay() {
       <CardArtPlaceholder>
         {<img src={image} alt="Mock Card Image" aria-label="Mock Card Image" />}
       </CardArtPlaceholder>
-      <CardType>{type}</CardType>
+      <CardType>{type.charAt(0).toUpperCase() + type.slice(1)}</CardType>
       <CardDescription>
         {description}
 

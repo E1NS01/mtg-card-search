@@ -152,14 +152,12 @@ export const EditSearchButton = styled.button<{ moveleft?: boolean }>`
   background-color: ${({ theme }) => theme.colors.white};
   border: none;
   font-size: 1.5rem;
+`;
 
-  ${({ moveleft }) =>
-    moveleft &&
-    `
-    position: absolute;
-    left: 2.8rem;
-    bottom: 2.8rem;
-  `}
+export const EditSearchButtonSucess = styled(EditSearchButton)`
+  position: absolute;
+  left: 2.8rem;
+  bottom: 2.8rem;
 `;
 
 export const ColorBar = styled.div`

@@ -2,6 +2,7 @@ import { RESET_LIST, UPDATE_LIST } from "../actions/cardListActions";
 
 const initialState = {
   data: [],
+  error: null,
   colors: {
     white: 0,
     blue: 0,

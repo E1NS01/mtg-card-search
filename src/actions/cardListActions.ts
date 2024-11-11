@@ -2,8 +2,12 @@ export const UPDATE_LIST = "UPDATE_LIST";
 export const RESET_LIST = "RESET_LIST";
 
 export function updateCardList(
-  field: string,
-  value: string[] | Record<string, number>
+  field: keyof CardListState,
+  value:
+    | string[]
+    | Record<string, number>
+    | { message: string; url: string }
+    | null
 ) {
   return { type: UPDATE_LIST, payload: { field, value } };
 }

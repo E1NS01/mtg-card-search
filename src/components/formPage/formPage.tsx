@@ -67,6 +67,7 @@ function FormPage() {
         );
         return;
       }
+
       navigate("/loading");
     } catch (error) {
       console.error("Submission error:", error);

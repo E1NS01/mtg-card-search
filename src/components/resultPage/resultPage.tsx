@@ -5,6 +5,7 @@ import {
   CardWrapper,
   ContentContainer,
   EditSearchButton,
+  EditSearchButtonSucess,
   NavigationButton,
   NavigationContainer,
   NoCardsFoundContainer,
@@ -16,10 +17,10 @@ import { Container } from "../../styles/globalStyle";
 
 function ResultPage() {
   const [index, setIndex] = useState<number>(0);
-  const { data } = useSelector((state: RootState) => state.cardList);
+  const { data, error } = useSelector((state: RootState) => state.cardList);
   const navigate = useNavigate();
 
-  const isSuccess = data[0] !== "error";
+  const isSuccess = !error;
 
   if (!isSuccess) {
     return (
@@ -69,13 +70,12 @@ function ResultPage() {
           </CardImage>
         </ContentContainer>
         <ColorRepresentation />
-        <EditSearchButton
-          moveleft={isSuccess}
+        <EditSearchButtonSucess
           onClick={() => navigate("/")}
           aria-label="Edit Search"
         >
           Edit Search
-        </EditSearchButton>
+        </EditSearchButtonSucess>
       </CardWrapper>
     </Container>
   );
